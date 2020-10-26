@@ -50,7 +50,7 @@ All the sensor values are shown on a I2C OLED display, switching between the two
 - **D2:** common button GND (same interrupt)
 - **D5:** WS2812 LED stripe
 - **A0:** MQ135
-- **A4:** OLED + BME280 (I2C)
+- **A5:** OLED + BME280 (I2C)
 - **A4:** OLED + BME280 (I2C)
 
 
