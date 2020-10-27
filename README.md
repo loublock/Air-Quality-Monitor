@@ -1,7 +1,7 @@
 # Air Quality Monitor
 
-This projects topic is a device capable to measure the surrounding air quality dependent on CO2 and CO value as well as air temperature, pressure and relative humidity. 
-The idea is to monitor the air quality in order to give a feedback how "healthy" the air in your room really is. In times of Corona virus this can be used as an indicator to ventilate your office or living room in order to minimize the infection risk. A LED stripe signals you the time to ventilate the room and also when the CO2/CO concentration gets unhealthy.
+This project's topic is a device capable to measure the surrounding air quality dependent on CO2 and CO value as well as air temperature, pressure, and relative humidity. 
+The idea is to monitor the air quality in order to give feedback on how "healthy" the air in your room really is. In times of Coronavirus, this can be used as an indicator to ventilate your office or living room in order to minimize the infection risk. A LED stripe signals you the time to ventilate the room and also when the CO2/CO concentration gets unhealthy.
 
 
 ## Table of Contents
@@ -9,7 +9,7 @@ The idea is to monitor the air quality in order to give a feedback how "healthy"
 1. Working principle
    1. Idea
    2. Sensors and actuators
-   3. Core functionalities
+   3. Code explanation
 2. Adjustable parameters
 3. Used hardware
 4. Wiring
@@ -20,20 +20,43 @@ The idea is to monitor the air quality in order to give a feedback how "healthy"
 
 ## 1 Working principle
 ### 1.1 Idea
-By measuring the gas concentration of CO2/CO the quality of the ambient air can be determined. Thinking of an office room for example, by having no other CO2 source then humans, the amount of CO2 in the air is relative to the amount of people in the room and the time without ventilation. To minimize the risk of infection and maximize human performance, a small amount of CO2 is required. 
+By measuring the gas concentration of CO2/CO the quality of the ambient air can be determined. Thinking of an office room for example, by having no other CO2 source than humans, the amount of CO2 in the air is relative to the number of people in the room and the time without ventilation. To minimize the risk of infection and maximize human performance, a small amount of CO2 is required. 
 
 
 ### 1.2 Sensors and actuators
-The CO2/CO is measured by a MQ-135 gas sensor, return the gas concentration in PPM (more in this repo: https://github.com/miguel5612/MQSensorsLib). This value depends on the temperature and the rel. humidity in the room. A BME280 sensor is used to get this information. Adding the temperature compensation to the MQSensorsLib according to formulars in this repo https://github.com/GeorgK/MQ135, we should get pretty accurate reading values. 
+The CO2/CO is measured by an MQ-135 gas sensor, returns the gas concentration in PPM (more in this repo: https://github.com/miguel5612/MQSensorsLib). This value depends on the temperature and the rel. humidity in the room. A BME280 sensor is used to get this information. Adding the temperature compensation to the MQSensorsLib according to formulas in this repo https://github.com/GeorgK/MQ135, we should get pretty accurate reading values. 
 
-All the sensor values are shown on a I2C OLED display, switching between the two menus via a push button. If a critical value of CO2/CO in the room is reached, the indicator LEDs will blink red. The will scroll in orange when room ventilation is suggested. A gas concentration upper and lower limit is configured therefor.
+All the sensor values are shown on an I2C OLED display, switching between the two menus via a push button. If a critical value of CO2/CO in the room is reached, the indicator LEDs will blink red. They will scroll in orange when room ventilation is suggested. A gas concentration upper and lower limit is configured therefor.
 
-### 1.3 Core functionalities (coming soon)
+### 1.3 Code explanation
+In this section, I'll explain the most important functions in short. 
+
+**loop()** is checking the gas limits, LED mode, and display mode. Pressing button one switches between the display modes, button two between the LED modes (gas warning and flashlight). The variables checked here get toggled in the button interrupt service routine (ISR).
+
+**print_readings_display()** prints the regular three/four lines of reading values.
+
+**print_alarm_value_display()** prints the gas reading value in big that exceeded it's upper limit.
+
+**blink_LED()** blinking LEDs
+
+**glow_LED()** LEDs on
+
+**scroll_LED()** LEDs scrolling
+
+**btn_press_ISR()** button ISR (debounced). Checks which button has been pressed and toggles the corresponding variable. (See more here: https://create.arduino.cc/projecthub/Svizel_pritula/10-buttons-using-1-interrupt-2bd1f8)
+
+**init_mq135()** sets RL value according to define and reads out R0 from EEPROM.
+
+**calibration_mq135()** calibrates the MQ135 R0 value if variable *mq135_cal_done* is set to false.
+
+**get_mq135_readings()** reads sensor values, smoothes them and applies temperature/humidity compensation.
 
 
 ## 2 Adjustable parameters 
 
-- Resistor at pin B2 of your MQ135. (1k at most chinese boards but it should one between 10k and 47k, 20k ideal.)
+**Important: The MQ135 needs to be calibrated once! To do so change the variable *mq135_cal_done* on false and place it outside (fresh air). After heating (5 min) the calibration starts (30 sec). After that change the variable back to true, the calibrated R0 is written to EEPROM and is read out on device start.** 
+
+- Resistor at pin B2 of your MQ135. (1k at most Chinese boards but it should one between 10k and 47k, 20k ideal.)
 
 *#define RL 20* 
 
@@ -64,7 +87,7 @@ All the sensor values are shown on a I2C OLED display, switching between the two
 *#define CO_LOW 40* 
 
 
-You can change the pinout or anything else of course if you desire, but beware for side effects!
+You can change the pinout or anything else of course if you desire, but beware of side effects!
 
 
 ## 3 Used hardware 
@@ -165,4 +188,4 @@ Assemble all parts as shown in the picture and solder the cables concurrently. S
 Thanks to **Matthias E.** for the design of the 3D-printed housing.
 
 **MQ135 library:** Thanks to **Miguel A. Califa U.** (https://github.com/miguel5612/MQSensorsLib) for the general functions 
-and **George K.** (https://github.com/GeorgK/MQ135) for the temperature compensation
+and **George K.** (https://github.com/GeorgK/MQ135) for the temperature compensation.
