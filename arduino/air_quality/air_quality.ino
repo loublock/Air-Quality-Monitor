@@ -54,7 +54,7 @@ Adafruit_BME280 bme;
 #define RL 20
 
 // heating time in ms
-#define HEATING_TIME 180000 //~ 5 min
+#define HEATING_TIME 300000 //~ 5 min
 
 // temperature and rel humidity correction according to Georg Krocker
 #define CORA 0.00035
