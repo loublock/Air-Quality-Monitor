@@ -14,23 +14,24 @@ The idea is to monitor the air quality in order to give a feedback how "healthy"
 3. Used hardware
 4. Wiring
 5. 3D printed housing
-6. Credits
+6. Assembly
+7. Credits
 
 
-## Working principle
-### Idea
+## 1 Working principle
+### 1.1 Idea
 By measuring the gas concentration of CO2/CO the quality of the ambient air can be determined. Thinking of an office room for example, by having no other CO2 source then humans, the amount of CO2 in the air is relative to the amount of people in the room and the time without ventilation. To minimize the risk of infection and maximize human performance, a small amount of CO2 is required. 
 
 
-### Sensors and actuators
+### 1.2 Sensors and actuators
 The CO2/CO is measured by a MQ-135 gas sensor, return the gas concentration in PPM (more in this repo: https://github.com/miguel5612/MQSensorsLib). This value depends on the temperature and the rel. humidity in the room. A BME280 sensor is used to get this information. Adding the temperature compensation to the MQSensorsLib according to formulars in this repo https://github.com/GeorgK/MQ135, we should get pretty accurate reading values. 
 
 All the sensor values are shown on a I2C OLED display, switching between the two menus via a push button. If a critical value of CO2/CO in the room is reached, the indicator LEDs will blink red. The will scroll in orange when room ventilation is suggested. A gas concentration upper and lower limit is configured therefor.
 
-### Core functionalities (coming soon)
+### 1.3 Core functionalities (coming soon)
 
 
-## Adjustable parameters 
+## 2 Adjustable parameters 
 
 - Resistor at pin B2 of your MQ135. (1k at most chinese boards but it should one between 10k and 47k, 20k ideal.)
 
@@ -66,16 +67,18 @@ All the sensor values are shown on a I2C OLED display, switching between the two
 You can change the pinout or anything else of course if you desire, but beware for side effects!
 
 
-## Used hardware 
+## 3 Used hardware 
 - BME280 sensor board
 - Oled I2C 128x32
 - MQ-135 sensor board
 - 2x push button
 - WS2812 LED stripe 60 pixels/m
 - Arduino Nano
+- 20 mm round switch
+- 6x M3x10 mm
 
 
-## Wiring 
+## 4 Wiring 
 *image coming soon*
 
 **Arduino Nano:**
@@ -132,7 +135,7 @@ You can change the pinout or anything else of course if you desire, but beware f
 - **Din:** D5 Arduino
 
 
-## 3D printed housing
+## 5 3D printed housing
 ![rendered](/images/rendered.png)
 
 Print all the files in the folder *3d_print* according to the table below. Please notice that you only need to print one lid, either the one with battery support or without. The one without battery is there to place your Arduino Nano in and connect it directly to USB power. The one with the battery support is able to hold up to four 18650 batteries as well as a charging board.
@@ -151,8 +154,13 @@ Glass | 0.2 mm | Transparent | 0
 Lid Battery | 0.2 mm | Black | 0 
 Lid | 0.2 mm | Black | 0 
 
+## 6 Assembly
+Assemble all parts as shown in the picture and solder the cables concurrently. Screw the parts together with the M3's.
 
-## Credits
+![assembly](/images/assembly.png)
+
+
+## 7 Credits
 
 Thanks to **Matthias E.** for the design of the 3D-printed housing.
 
