@@ -30,7 +30,19 @@ All the sensor values are shown on a I2C OLED display, switching between the two
 ### Core functionalities (coming soon)
 
 
-## Adjustable parameters (coming soon)
+## Adjustable parameters 
+
+- *#define RL 20* Resistor at pin B2 of your MQ135. (1k at most chinese boards but it should one between 10k and 47k, 20k ideal.)
+- *#define HEATING_TIME 180000* Pre heating of MQ135 in milliseconds, 5 mins is recommended.
+- *#define ATMOCO2 410* Your atmospheric CO2 value, if you know it exactly at your location.
+
+- *#define CO2_MAX 2000* Upper CO2 limit (when red blinking starts)
+- *#define CO2_LOW 1000* Lower CO2 limit (when green glowing starts)
+- *#define CO_MAX 70* Upper CO limit (when red blinking starts)
+- *#define CO_LOW 40* Lower CO limit (when green glowing starts)
+Between upper and lower limit the LEDs scrolling in orange.
+
+You can change the pinout or anything else of course if you desire, but beware for side effects!
 
 
 ## Used hardware 
@@ -45,22 +57,79 @@ All the sensor values are shown on a I2C OLED display, switching between the two
 ## Wiring 
 *image coming soon*
 
+**Arduino Nano:**
+
 - **D7:** button 1
-- **D6:** button 1 (or vise versa)
+- **D6:** button 2 (or vise versa)
 - **D2:** common button GND (same interrupt)
 - **D5:** WS2812 LED stripe
 - **A0:** MQ135
-- **A5:** OLED + BME280 (I2C)
-- **A4:** OLED + BME280 (I2C)
+- **A4:** OLED + BME280 (I2C) SDA
+- **A5:** OLED + BME280 (I2C) SCL
 
 
+**BME280 (I2C):**
 
-## 3D printed housing (coming soon)
+- **Vin:** +5V Arduino
+- **GND:** GND Arduino
+- **SCL:** A5 Arduino
+- **SDA:** A4 Arduino
+
+
+**Display (I2C):**
+
+- **Vin:** +5V Arduino
+- **GND:** GND Arduino
+- **SCL:** A5 Arduino
+- **SDA:** A4 Arduino
+
+
+**MQ-135:**
+
+- **Vin:** +5V Arduino
+- **GND:** GND Arduino
+- **A0:** A0 Arduino
+- **D0:** Not connected
+
+
+**Button 1:**
+
+- **Vin:** D7 Arduino
+- **GND:** D2 Arduino
+
+
+**Button 2:**
+
+- **Vin:** D6 Arduino
+- **GND:** D2 Arduino
+
+
+**LED stripe:**
+
+- **Vin:** +5V Arduino
+- **GND:** GND Arduino
+- **Din:** D5 Arduino
+
+
+## 3D printed housing
+![rendered](/images/rendered.png)
+
+
+Part | Layer height | Color | Horizontal Expansion
+---- | ------------ | ----- | --------------------
+Top Grid | 0.2 mm | Black | -0.5 mm
+Lower Housing | 0.2 mm | Black | 0
+Button Bracket | 0.2 mm | Black | 0 
+Sensor Bracket | 0.2 mm | Black | 0 
+Button Left | 0.2 mm | Red | 0
+Button Right | 0.2 mm | Red | 0
+LED Mount | 0.2 mm | Red | -0.5 mm
+Glass | 0.2 mm | Transparent | 0
 
 
 ## Credits
 
-Thanks to **Matthias E.** for the 3D-printed housing design and the general idea of creating such a device.
+Thanks to **Matthias E.** for the design of the 3D-printed housing.
 
 **MQ135 library:** Thanks to **Miguel A. Califa U.** (https://github.com/miguel5612/MQSensorsLib) for the general functions 
 and **George K.** (https://github.com/GeorgK/MQ135) for the temperature compensation
