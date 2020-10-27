@@ -32,15 +32,36 @@ All the sensor values are shown on a I2C OLED display, switching between the two
 
 ## Adjustable parameters 
 
-- *#define RL 20* Resistor at pin B2 of your MQ135. (1k at most chinese boards but it should one between 10k and 47k, 20k ideal.)
-- *#define HEATING_TIME 180000* Pre heating of MQ135 in milliseconds, 5 mins is recommended.
-- *#define ATMOCO2 410* Your atmospheric CO2 value, if you know it exactly at your location.
+- Resistor at pin B2 of your MQ135. (1k at most chinese boards but it should one between 10k and 47k, 20k ideal.)
 
-- *#define CO2_MAX 2000* Upper CO2 limit (when red blinking starts)
-- *#define CO2_LOW 1000* Lower CO2 limit (when green glowing starts)
-- *#define CO_MAX 70* Upper CO limit (when red blinking starts)
-- *#define CO_LOW 40* Lower CO limit (when green glowing starts)
-Between upper and lower limit the LEDs scrolling in orange.
+*#define RL 20* 
+
+- Pre heating of MQ135 in milliseconds, 5 mins is recommended.
+
+*#define HEATING_TIME 300000* 
+
+- Your atmospheric CO2 value, if you know it exactly at your location.
+
+*#define ATMOCO2 410* 
+
+
+- Upper CO2 limit (when red blinking starts)
+
+*#define CO2_MAX 2000* 
+
+- Lower CO2 limit (when green glowing starts)
+(Between upper and lower limit the LEDs scrolling in orange.)
+
+*#define CO2_LOW 1000* 
+
+- Upper CO limit (when red blinking starts)
+
+*#define CO_MAX 70* 
+
+- Lower CO limit (when green glowing starts)
+
+*#define CO_LOW 40* 
+
 
 You can change the pinout or anything else of course if you desire, but beware for side effects!
 
@@ -114,6 +135,8 @@ You can change the pinout or anything else of course if you desire, but beware f
 ## 3D printed housing
 ![rendered](/images/rendered.png)
 
+Print all the files in the folder *3d_print* according to the table below. Please notice that you only need to print one lid, either the one with battery support or without. The one without battery is there to place your Arduino Nano in and connect it directly to USB power. The one with the battery support is able to hold up to four 18650 batteries as well as a charging board.
+
 
 Part | Layer height | Color | Horizontal Expansion
 ---- | ------------ | ----- | --------------------
@@ -125,6 +148,8 @@ Button Left | 0.2 mm | Red | 0
 Button Right | 0.2 mm | Red | 0
 LED Mount | 0.2 mm | Red | -0.5 mm
 Glass | 0.2 mm | Transparent | 0
+Lid Battery | 0.2 mm | Black | 0 
+Lid | 0.2 mm | Black | 0 
 
 
 ## Credits
