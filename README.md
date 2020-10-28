@@ -166,13 +166,13 @@ Print all the files in the folder *3d_print* according to the table below. Pleas
 
 Part | Layer height | Color | Horizontal Expansion
 ---- | ------------ | ----- | --------------------
-Top Grid | 0.2 mm | Black | -0.5 mm
+Top Grid | 0.2 mm | Black | -0.05 mm
 Lower Housing | 0.2 mm | Black | 0
-Button Bracket | 0.2 mm | Black | 0 
+Button Bracket | 0.2 mm | Black | -0.05 mm
 Sensor Bracket | 0.2 mm | Black | 0 
 Button Left | 0.2 mm | Red | 0
 Button Right | 0.2 mm | Red | 0
-LED Mount | 0.2 mm | Red | -0.5 mm
+LED Mount | 0.2 mm | Red | -0.05 mm
 Glass | 0.2 mm | Transparent | 0
 Lid Battery | 0.2 mm | Black | 0 
 Lid | 0.2 mm | Black | 0 
